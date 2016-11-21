@@ -1,3 +1,4 @@
+var webpack = require('webpack')
 var path = require('path')
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var purify = require("purifycss-webpack-plugin");
@@ -9,10 +10,11 @@ var PATHS = {
 
 module.exports = {
 	entry: {
-		homepage: PATHS.source
+		app: PATHS.source
 	},
 	output:{
 		path: PATHS.build,
+		publicPath: '/',
 		filename: '[name].js'
 	},
 	module:{
@@ -21,7 +23,7 @@ module.exports = {
 				test: /\.js$/,
 				loader: 'babel',
 				query: {
-	                    presets: ['es2015', 'stage-0']
+	                    presets: ['react', 'es2015']
 	            }
 			},
 			{
@@ -45,7 +47,17 @@ module.exports = {
             basePath: './',
             paths: [
                 "*.html"
-            ]
-        })
+            ],
+            minify:true,
+            rejected:true
+        }),
+        new webpack.optimize.DedupePlugin(),
+	    new webpack.optimize.OccurrenceOrderPlugin(),
+	    new webpack.optimize.UglifyJsPlugin({warnings:false}),
+	    new webpack.DefinePlugin({
+		    'process.env': {
+		        NODE_ENV: JSON.stringify("production"),
+		    },
+		})
     ]
 }
