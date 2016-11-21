@@ -1,3 +1,2 @@
-# webpack-purify
-
-scss -> css -> (purify) -> USED CSS GOODNESS
+# routing-skeleton
+react + react-router + sass + purifycss
