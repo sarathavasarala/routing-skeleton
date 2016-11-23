@@ -4,19 +4,27 @@ import { Router, Route, browserHistory } from 'react-router'
 import { IndexRoute } from 'react-router'
 import App from './App'
 import Home from './Home'
-import About from './About'
 import './bootstrap.min.css'
 import './main.scss'
 
-const Hello = () => {
+const Website = () => {
 	return (
 			<Router history={ browserHistory }>
 				<Route path = "/" component = {App}>
 					<IndexRoute component={Home}/>
-					<Route path = "/about" component = { About }/>
+					<Route path = "/about" getComponent={(nextState, callback) => {
+                        require.ensure([], function(require) {
+                            callback(null, require('./About').default);
+                        })
+                    }}/>
+					<Route path = "/profile"  getComponent={(nextState, callback) => {
+                        require.ensure([], function(require) {
+                            callback(null, require('./Profile').default);
+                        })
+                    }}/>
 				</Route>
 			</Router>
 		)
 }
 
-render(<Hello/>, document.getElementById('react-container'))
+render(<Website/>, document.getElementById('react-container'))

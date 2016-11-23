@@ -1,8 +1,7 @@
 var webpack = require('webpack')
 var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require("extract-text-webpack-plugin")
-var purify = require("purifycss-webpack-plugin");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 var PATHS = {
 	source: path.join(__dirname, 'source'),
@@ -41,7 +40,7 @@ module.exports = {
 			},
 			{
 				test: /\.(jpg|png)$/,
-				loader: 'url?limit=900000',
+				loader: 'url?limit=1500000',
 				include: PATHS.assets
 			}
 		]
@@ -50,6 +49,7 @@ module.exports = {
 		extensions: ['', '.js']
 	},
 	plugins: [
+        new ExtractTextPlugin("[name].css"),
         new HtmlWebpackPlugin({
 			template: './index.html',
 			inject: 'body',
@@ -58,30 +58,6 @@ module.exports = {
             name: 'vendor',
             filename: 'vendor.js',
             minChunks: Infinity
-        }),
-        new ExtractTextPlugin("[name].css"),
-        new purify({
-            basePath: './',
-            paths: [
-                "*.html",
-                "./source/*.js"
-            ],
-            purifyOptions: {
-            	minify:true,
-            	info:true
-            }
-        }),
-        new webpack.optimize.DedupePlugin(),
-	    new webpack.optimize.OccurrenceOrderPlugin(),
-	    new webpack.optimize.UglifyJsPlugin({ 
-	    	compress: {
-	    		warnings:false
-	    	}
-	    }),
-	    new webpack.DefinePlugin({
-		    'process.env': {
-		        NODE_ENV: JSON.stringify("production"),
-		    },
-		})
+        })
     ]
 }

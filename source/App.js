@@ -11,6 +11,7 @@ export default React.createClass({
             <div className="link-wrapper">
               <IndexLink to="/" activeClassName="active" onlyActiveOnIndex={true}> Home </IndexLink>
               <Link activeClassName="active" to = "/about"> About </Link>
+              <Link activeClassName="active" to = "/profile"> Profile </Link>
             </div>
           </div>
         </div>
