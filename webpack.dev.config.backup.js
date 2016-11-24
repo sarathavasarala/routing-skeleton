@@ -40,7 +40,7 @@ module.exports = {
 			},
 			{
 				test: /\.(jpg|png)$/,
-				loader: 'url?limit=1500000',
+				loader: 'url?limit=8192?name=[path][name].[ext]&context=./assets',
 				include: PATHS.assets
 			}
 		]

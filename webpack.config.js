@@ -18,7 +18,7 @@ module.exports = {
 	output:{
 		path: PATHS.build,
 		publicPath: '/',
-		filename: '[name].[hash:8].js'
+		filename: '[name].js'
 	},
 	module:{
 		loaders: [
@@ -41,7 +41,7 @@ module.exports = {
 			},
 			{
 				test: /\.(jpg|png)$/,
-				loader: 'url?limit=900000',
+				loader: 'url?limit=8192?name=[path][name].[ext]&context=./assets',
 				include: PATHS.assets
 			}
 		]
@@ -52,7 +52,7 @@ module.exports = {
 	plugins: [
         new HtmlWebpackPlugin({
 			template: './index.html',
-			inject: 'body'
+			inject: 'body',
 		}),
 		new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',

@@ -1,0 +1,1 @@
+webpackJsonp([2],{222:function(e,t,u){"use strict";function a(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0});var n=u(6),r=a(n);t.default=r.default.createClass({displayName:"About",render:function(){return r.default.createElement("div",{className:"h3"},"About")}})}});
